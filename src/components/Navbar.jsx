@@ -9,7 +9,6 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-    {/* Alyssa: Just make sure routes and count work */}
       <Link to="/" className="brand">EZTechMovie</Link>
       <div className="nav-links">
         <NavLink to="/subscriptions">Subscriptions</NavLink>

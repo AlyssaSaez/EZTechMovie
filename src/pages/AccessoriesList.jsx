@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../cart/CartContext';
-import { accessories } from '../data/Data'; // adjust to your Data.js
+import { accessories } from '../data/Data'; 
 
 export default function AccessoriesList() {
   const { addItem } = useCart();

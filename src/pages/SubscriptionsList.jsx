@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCart } from '../cart/CartContext';
-import { subscriptions } from '../data/Data'; // adjust to your Data.js
+import { subscriptions } from '../data/Data'; 
 
 export default function SubscriptionsList() {
   const { items, addItem, warning } = useCart();

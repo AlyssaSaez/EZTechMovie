@@ -1,4 +1,4 @@
-# EZTech Cart Application
+# EZTechMovie Cart App
 
 This project is a React application developed for our course assignment.  
 It features a cart system with subscriptions and accessories, navigation, and styling.
@@ -10,6 +10,7 @@ It features a cart system with subscriptions and accessories, navigation, and st
 
 ## Instructor
 - **Joseph Issa**
+- **INT499: Capstone for Information Technology**
 
 ## Getting Started
 1. Clone the repository:
