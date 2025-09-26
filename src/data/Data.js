@@ -1,4 +1,7 @@
 // src/data.js
+// NOTE for Weston: Each item now has a "type" field so the app can 
+// tell subscriptions and accessories apart. This lets the cart logic 
+// enforce the one-subscription rule and display items in the right list.
 const list = [
   {
     id: 1,
@@ -73,6 +76,10 @@ const list = [
     type: "accessory",
   },
 ];
+
+// NOTE for Weston: These named exports give you direct access to 
+// just subscriptions or just accessories without needing to filter 
+// manually. Use these in your components instead of list[].
 
 export const subscriptions = list.filter(item => item.type === "subscription");
 export const accessories   = list.filter(item => item.type === "accessory");
