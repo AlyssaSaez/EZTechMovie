@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useCart } from '../cart/CartContext';
 import { getCartCount } from '../cart/selectors';
+import logo from '../assets/eztech.png';
 
 export default function Navbar() {
   const { items } = useCart();
@@ -9,7 +10,8 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="brand">EZTechMovie</Link>
+      <Link to="/" className="brand">
+        <img src={logo} alt="Logo" className="logo" />EZTechMovie</Link>
       <div className="nav-links">
         <NavLink to="/subscriptions">Subscriptions</NavLink>
         <NavLink to="/accessories">Accessories</NavLink>
@@ -22,4 +24,3 @@ export default function Navbar() {
           - Empty state polish */}
     </nav>
   );
-}
