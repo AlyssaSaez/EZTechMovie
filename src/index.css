@@ -3,7 +3,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600&display=swap');
 
-*{box-sizing:border-box}
+* { box-sizing: border-box; }
 
 body{
   margin:0;
@@ -25,6 +25,7 @@ body{
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 }
 
+/* ---------- NAVBAR ---------- */
 .navbar{
   display:flex;
   justify-content:space-between;
@@ -55,12 +56,6 @@ body{
   outline-offset:2px;
 }
 
-.logo{
-  height:40px;
-  width:auto;
-  margin-right:0.5rem;
-}
-
 .nav-links{
   display:flex;
   gap:1.5rem;
@@ -80,6 +75,26 @@ body{
   outline-offset:2px;
 }
 
+/* Active link helper (from NavLink) */
+.active { text-decoration: underline; }
+
+/* Cart link + badge */
+.cart-link { position: relative; }
+.cart-badge{
+  display:inline-block;
+  min-width:1.25rem;
+  padding:0 0.35rem;
+  margin-left:0.35rem;
+  font-size:0.85rem;
+  line-height:1.25rem;
+  text-align:center;
+  border-radius:9999px;
+  background:#ff4757;
+  color:#fff;
+  vertical-align:middle;
+}
+
+/* ---------- HEADINGS ---------- */
 h1{
   font-family:'Bebas Neue';
   font-size:2.5rem;
@@ -87,21 +102,23 @@ h1{
   margin:1rem 0 1.5rem 0;
 }
 
+/* ---------- CARD / LISTS ---------- */
 .card{
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
+  display:flex;                 /* changed from inline-flex */
+  flex-direction:column;        /* stack content to avoid overlaps */
+  align-items:stretch;
+  gap:0.75rem;                  /* consistent spacing inside card */
   width:100%;
-  padding:1rem 2.5rem;
+  padding:1rem 1.25rem;
   background:#d98c4a;
   color:#fff;
   text-decoration:none;
   border-radius:8px;
-  cursor:pointer;
-  font-size:1.25rem;
+  cursor:default;
+  font-size:1.05rem;
   font-weight:500;
-  text-align:center;
-  transition:background 0.3s ease,box-shadow 0.3s ease;
+  text-align:left;
+  transition:background 0.3s ease,box-shadow 0.3s ease, transform .05s ease;
   box-shadow:0 4px 12px rgba(0,0,0,0.5);
   outline:none;
 }
@@ -114,14 +131,18 @@ h1{
   outline-offset:2px;
 }
 
-.card h3+p{
-  font-size:1.25rem;
-  color:#fff;
-  display:inline-block;
-  vertical-align:middle;
-  margin-right:0.5rem;
+/* Title/price row */
+.card .row{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:0.75rem;
 }
 
+.card h3{ margin:0; }
+.card p{ margin:0; }
+
+/* Buttons inside cards */
 .card button{
   padding:0.5rem 1rem;
   background:#f0a45c;
@@ -132,9 +153,9 @@ h1{
   font-weight:500;
   cursor:pointer;
   display:inline-block;
-  vertical-align:middle;
   transition:background 0.3s ease,border-color 0.3s ease;
   outline:none;
+  align-self:flex-start;        /* prevent overlay on text */
 }
 
 .card button:hover,
@@ -145,6 +166,28 @@ h1{
   outline-offset:2px;
 }
 
+/* Disabled state + in-cart style */
+.card button[disabled]{
+  cursor:not-allowed;
+  opacity:.65;
+}
+.in-cart{
+  background:#b8793a !important;
+  border-color:#b8793a !important;
+}
+
+/* Accessories feedback pill */
+.pill{
+  display:inline-block;
+  padding:0.15rem 0.5rem;
+  border-radius:9999px;
+  font-size:0.8rem;
+  background:#2f9e44;
+  color:#fff;
+  margin-left:0.5rem;
+}
+
+/* ---------- CART PAGE ---------- */
 .cart-list{
   list-style:none;
   padding:0;
@@ -208,11 +251,52 @@ h1{
   outline-offset:2px;
 }
 
-.muted{
-  opacity:0.7;
-}
+.muted{ opacity:0.7; }
 
 .warn{
   color:#ff6b6b;
   font-weight:500;
 }
+
+/* ---------- TOAST (warning) ---------- */
+.toast-overlay{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:1rem;
+  background:rgba(0,0,0,0.25);
+  z-index:1000;
+}
+.toast{
+  margin-top:0.5rem;
+  background:#222;
+  color:#fff;
+  padding:0.75rem 1rem;
+  border-radius:10px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  max-width:460px;
+  width:100%;
+}
+.toast-content{
+  display:flex;
+  gap:0.5rem;
+  align-items:center;
+}
+.toast-icon{ font-size:1.1rem; }
+.toast-text{ flex:1; }
+.toast-close{
+  background:transparent;
+  border:none;
+  color:#fff;
+  font-size:1.25rem;
+  cursor:pointer;
+}
+
+.in-cart {
+  background:#b8793a !important;
+  border-color:#b8793a !important;
+  cursor: default;
+}
+
