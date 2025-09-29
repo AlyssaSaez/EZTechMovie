@@ -1,3 +1,4 @@
+// src/cart/CartContext.jsx
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { cartReducer, initialState } from './cartReducer';
 
@@ -5,22 +6,19 @@ const CartContext = createContext(null);
 const LS_KEY = 'eztech_cart_v1';
 
 export function CartProvider({ children }) {
-  const [state, dispatch] = useReducer(cartReducer, initialState);
-
-  // Hydrate once on mount
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(LS_KEY);
-      if (raw) {
-        dispatch({ type: 'HYDRATE_FROM_LS', payload: JSON.parse(raw) });
+  const [state, dispatch] = useReducer(
+    cartReducer,
+    initialState,
+    (init) => {
+      try {
+        const raw = localStorage.getItem(LS_KEY);
+        return raw ? JSON.parse(raw) : init;
+      } catch {
+        return init;
       }
-    } catch (e) {
-      console.error('Failed to hydrate cart', e);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  );
 
-  // Persist on every change
   useEffect(() => {
     try {
       localStorage.setItem(LS_KEY, JSON.stringify(state));
