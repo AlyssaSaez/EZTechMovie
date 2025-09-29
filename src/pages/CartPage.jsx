@@ -25,7 +25,6 @@ export default function CartPage() {
           <li key={item.id} className="cart-row">
             <div>
               <strong>{item.name}</strong>
-              <span className="muted"> {item.type}</span>
             </div>
             <div className="qty-controls">
               <button onClick={() => decQty(item.id)} aria-label={`Decrease ${item.name}`}>
