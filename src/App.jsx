@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import SubscriptionsList from './pages/SubscriptionsList';
 import AccessoriesList from './pages/AccessoriesList';
 import CartPage from './pages/CartPage';
+import Footer from './components/Footer';
+
 
 export default function App() {
   return (
@@ -18,6 +20,7 @@ export default function App() {
           <Route path="/accessories" element={<AccessoriesList />} />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
+        <Footer />
       </CartProvider>
     </BrowserRouter>
   );
