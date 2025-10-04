@@ -1,9 +1,11 @@
-import React from 'react';
-import { useCart } from '../cart/CartContext';
-import { getCartCount, getCartTotal } from '../cart/selectors';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "../cart/CartContext";
+import { getCartCount, getCartTotal } from "../cart/selectors";
 
 export default function CartPage() {
   const { items, incQty, decQty, removeItem, clearCart } = useCart();
+  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
@@ -21,17 +23,23 @@ export default function CartPage() {
     <div className="page">
       <h1>Your Cart</h1>
       <ul className="cart-list">
-        {items.map(item => (
+        {items.map((item) => (
           <li key={item.id} className="cart-row">
             <div>
               <strong>{item.name}</strong>
             </div>
             <div className="qty-controls">
-              <button onClick={() => decQty(item.id)} aria-label={`Decrease ${item.name}`}>
+              <button
+                onClick={() => decQty(item.id)}
+                aria-label={`Decrease ${item.name}`}
+              >
                 -
               </button>
               <span aria-live="polite">{item.qty}</span>
-              <button onClick={() => incQty(item.id)} aria-label={`Increase ${item.name}`}>
+              <button
+                onClick={() => incQty(item.id)}
+                aria-label={`Increase ${item.name}`}
+              >
                 +
               </button>
             </div>
@@ -46,7 +54,13 @@ export default function CartPage() {
       <div className="cart-summary">
         <p>Items: {count}</p>
         <p>Total: ${total.toFixed(2)}</p>
-        <button onClick={clearCart}>Clear cart</button>
+
+        <div style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
+          <button className="link" onClick={() => navigate("/checkout")}>
+            Proceed to Checkout
+          </button>
+          <button onClick={clearCart}>Clear cart</button>
+        </div>
       </div>
     </div>
   );
