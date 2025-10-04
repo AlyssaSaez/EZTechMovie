@@ -118,7 +118,7 @@ export default function CreditCard() {
             </label>
           </div>
 
-          <button type="submit">Save Card (local demo)</button>
+          <button type="submit">Pay now (local demo)</button>
           {saved && (
             <span className="pill" style={{ marginLeft: 8 }}>
               Payment Successful!
