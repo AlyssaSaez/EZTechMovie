@@ -40,3 +40,13 @@ export async function getPopular(page = 1) {
 export async function searchMovies(query, page = 1) {
   return request('/search/movie', { query, page, include_adult: 'false' });
 }
+
+// Get trending movies (period = 'day' | 'week')
+export async function getTrending(period = 'day', page = 1) {
+  const key = import.meta.env.VITE_TMDB_API_KEY;
+  const res = await fetch(
+    `https://api.themoviedb.org/3/trending/movie/${period}?page=${page}&api_key=${key}`
+  );
+  if (!res.ok) throw new Error('Failed to load trending movies');
+  return res.json();
+}

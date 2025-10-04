@@ -1,7 +1,8 @@
 // src/pages/Home.jsx
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth/AuthContext';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthContext";
+import TrendingCarousel from "../components/TrendingCarousel";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -9,23 +10,26 @@ export default function Home() {
 
   function handleSignOut() {
     logout();
-    navigate('/login', { replace: true });
+    navigate("/login", { replace: true });
   }
 
   return (
     <div className="page">
       <h1>Welcome to EZTechMovie</h1>
-      <p className="muted" style={{ marginTop: '-0.5rem' }}>
-        Manage subscriptions, accessories, discover movies & build your Streamlist.
+      <p className="muted" style={{ marginTop: "-0.5rem" }}>
+        Manage subscriptions, accessories, discover movies & build your
+        Streamlist.
       </p>
-
-      <div className="grid" style={{ marginTop: '1.25rem' }}>
+      <TrendingCarousel title="Trending Movies" />
+      <div className="grid" style={{ marginTop: "1.25rem" }}>
         {/* Movies */}
         <Link to="/movies" className="card">
           <div className="row">
             <h3>Search for Movies</h3>
           </div>
-          <p>Browse popular titles or search. Add favorites to your Streamlist.</p>
+          <p>
+            Browse popular titles or search. Add favorites to your Streamlist.
+          </p>
           <button>Open Movies</button>
         </Link>
 
@@ -34,7 +38,9 @@ export default function Home() {
           <div className="row">
             <h3>View Your Streamlist</h3>
           </div>
-          <p>Track what you want to watch. Mark watched, edit titles, or remove.</p>
+          <p>
+            Track what you want to watch. Mark watched, edit titles, or remove.
+          </p>
           <button>Open Streamlist</button>
         </Link>
 
@@ -71,7 +77,9 @@ export default function Home() {
             <h3>Sign Out</h3>
           </div>
           <p>Finish your session securely and return to the sign-in screen.</p>
-          <button className="link" onClick={handleSignOut}>Log Out</button>
+          <button className="link" onClick={handleSignOut}>
+            Log Out
+          </button>
         </div>
       </div>
     </div>

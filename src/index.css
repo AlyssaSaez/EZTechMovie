@@ -733,3 +733,95 @@ code {
 .wl-watched .wl-overview {
   opacity: 0.6;
 }
+
+/* ---------- Trending carousel with arrows ---------- */
+.trending { margin-top: 2rem; }
+.trending-head { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:.5rem; }
+.trending-title { font-family:'Bebas Neue'; font-size:2rem; letter-spacing:.5px; margin:0; }
+
+.trending-tabs { display:flex; gap:.5rem; }
+.tab {
+  background: rgba(255,255,255,.12);
+  border: 2px solid rgba(255,255,255,.18);
+  color:#fff; cursor:pointer;
+  padding:.4rem .7rem; border-radius:9999px;
+}
+.tab.active { background:#d98c4a; border-color:#d98c4a; }
+
+.carousel-wrap {
+  position: relative;
+  overflow: hidden;            /* keep arrows visible and content clipped */
+}
+.carousel {
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 150px;
+  gap:.75rem;
+  overflow-x:auto;
+  padding: .25rem 2.5rem;      /* space for arrows */
+  scroll-behavior:smooth;
+  scrollbar-width: none;       /* Firefox hide bar */
+}
+.carousel::-webkit-scrollbar { display:none; } /* WebKit hide bar */
+
+.carousel-item { display:flex; flex-direction:column; gap:.35rem; }
+.poster-wrap { position:relative; }
+.poster-wrap img,
+.poster-empty {
+  width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:10px;
+  background: rgba(0,0,0,.25);
+}
+.poster-empty { display:grid; place-items:center; color:rgba(255,255,255,.85); }
+
+.badge {
+  position:absolute; top:6px; left:6px; padding:.15rem .45rem;
+  font-size:.85rem; font-weight:700; color:#ffd166;
+  background: rgba(0,0,0,.65); border-radius:9999px;
+  box-shadow:0 2px 8px rgba(0,0,0,.45);
+}
+
+.caption { font-size:.95rem; line-height:1.2; color:#fff; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+
+/* pill buttons */
+.pill-btn {
+  align-self:start;
+  padding:.35rem .75rem;
+  border-radius:9999px;
+  font-size:.85rem;
+  border:2px solid #f0a45c;
+  background:transparent;
+  color:#f0a45c;
+  cursor:pointer;
+}
+.pill-btn:hover, .pill-btn:focus { outline:2px solid #fff; outline-offset:2px; }
+.pill-in { background:#f0a45c; color:#fff; }
+.pill-out { background:transparent; color:#f0a45c; }
+
+/* arrows */
+.car-arrow {
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:40px; height:64px; border-radius:10px;
+  display:grid; place-items:center; cursor:pointer;
+  background: rgba(0,0,0,.35); color:#fff; font-size:28px; line-height:1;
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter: blur(2px);
+  z-index: 5;                 /* keep above posters */
+  transition: opacity .15s ease;
+}
+.car-arrow:hover { background: rgba(0,0,0,.55); }
+.car-arrow.left { left:0.25rem; }
+.car-arrow.right { right:0.25rem; }
+
+.car-arrow.is-disabled {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* optional edge fades */
+.edge-fade {
+  position:absolute; top:0; bottom:0; width:42px; z-index:4; pointer-events:none;
+  background: linear-gradient(to right, rgba(15,15,15,.65), rgba(15,15,15,0));
+}
+.edge-fade.right { right:0; transform: scaleX(-1); }
+.edge-fade.left { left:0; }
+.edge-fade.hide { display:none; }
