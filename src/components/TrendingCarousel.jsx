@@ -140,9 +140,9 @@ export default function TrendingCarousel({ title = 'Trending Movies' }) {
                             overview: m.overview,
                           })
                     }
-                    aria-label={inList ? 'Remove from Watchlist' : 'Add to Watchlist'}
+                    aria-label={inList ? 'Remove from Watchlist' : 'Add to Streamlist'}
                   >
-                    {inList ? 'Remove' : 'Add'}
+                    {inList ? 'Remove' : 'Add to Streamlist'}
                   </button>
                 </div>
               );
