@@ -40,7 +40,7 @@ export default function Navbar() {
           to="/watchlist"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
-          Watchlist
+          Streamlist
         </NavLink>
         <NavLink
           to="/subscriptions"

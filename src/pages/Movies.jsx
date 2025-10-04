@@ -1,4 +1,3 @@
-// src/pages/Movies.jsx
 import React, { useEffect, useState } from 'react';
 import { getPopular, searchMovies } from '../api/tmdb';
 import MovieCard from '../components/MovieCard';
@@ -9,8 +8,6 @@ export default function Movies() {
   const [results, setResults] = useState([]);
   const [error, setError] = useState('');
 
-  const tmdbConfigured = !!import.meta.env.VITE_TMDB_API_KEY;
-
   async function loadPopular() {
     setLoading(true);
     setError('');
@@ -19,7 +16,7 @@ export default function Movies() {
       setResults(data.results || []);
     } catch (e) {
       console.error(e);
-      setError(e.message || 'Failed to load popular movies.');
+      setError('Failed to load popular movies.');
       setResults([]);
     } finally {
       setLoading(false);
@@ -37,7 +34,7 @@ export default function Movies() {
       setResults(data.results || []);
     } catch (e) {
       console.error(e);
-      setError(e.message || 'Search failed.');
+      setError('Search failed.');
       setResults([]);
     } finally {
       setLoading(false);
@@ -45,25 +42,17 @@ export default function Movies() {
   }
 
   useEffect(() => {
-    if (tmdbConfigured) {
-      loadPopular();
-    } else {
-      setError('TMDB API key missing. Add VITE_TMDB_API_KEY to .env and restart the dev server.');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tmdbConfigured]);
+    loadPopular();
+  }, []);
 
   return (
     <div className="page">
       <h1>Movies</h1>
 
-      {!tmdbConfigured && (
-        <p className="warn" style={{ marginBottom: '1rem' }}>
-          TMDB API key missing. Add <code>VITE_TMDB_API_KEY</code> to <code>.env</code> and restart.
-        </p>
-      )}
-
-      <form onSubmit={doSearch} style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem' }}>
+      <form
+        onSubmit={doSearch}
+        style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem' }}
+      >
         <input
           type="text"
           placeholder="Search movies (TMDB)…"
@@ -72,12 +61,17 @@ export default function Movies() {
           className="input"
           style={{ flex: 1 }}
         />
-        <button className="link" type="submit" disabled={!tmdbConfigured}>
+        <button className="link" type="submit">
           Search
         </button>
       </form>
 
-      {error && <p className="warn" style={{ marginBottom: '1rem' }}>{error}</p>}
+      {error && (
+        <p className="warn" style={{ marginBottom: '1rem' }}>
+          {error}
+        </p>
+      )}
+
       {loading ? (
         <p className="muted">Loading…</p>
       ) : (
