@@ -6,7 +6,6 @@ export default function MovieCard({ movie }) {
   const { list, add, remove } = useWatchlist();
   const inList = list.some((m) => m.id === movie.id);
 
-  const year = movie.release_date ? movie.release_date.slice(0, 4) : '';
   const handleToggle = () => {
     const pick = {
       id: movie.id,
@@ -17,6 +16,10 @@ export default function MovieCard({ movie }) {
     };
     inList ? remove(movie.id) : add(pick);
   };
+
+  const rating = typeof movie.vote_average === 'number'
+    ? movie.vote_average.toFixed(1)
+    : null;
 
   return (
     <article className="card movie-card">
@@ -30,12 +33,18 @@ export default function MovieCard({ movie }) {
         ) : (
           <div className="movie-poster--empty">No image</div>
         )}
+
+        {/* rating badge */}
+        {rating && (
+          <span className="movie-rating" aria-label={`Rating ${rating} out of 10`}>
+            ★ {rating}
+          </span>
+        )}
       </div>
 
       <div className="movie-body">
         <div className="movie-title-row">
           <h3 className="movie-title">{movie.title || 'Untitled'}</h3>
-          {year && <span className="movie-year">{year}</span>}
         </div>
         <p className="movie-overview">
           {movie.overview || 'No overview available.'}
@@ -45,9 +54,9 @@ export default function MovieCard({ movie }) {
       <button
         onClick={handleToggle}
         className={`movie-btn ${inList ? 'in-cart' : ''}`}
-        aria-label={inList ? 'Remove from Watchlist' : 'Add to Watchlist'}
+        aria-label={inList ? 'Remove from Streamlist' : 'Add to Streamlist'}
       >
-        {inList ? 'Remove from Watchlist' : 'Add to Watchlist'}
+        {inList ? 'Remove from Streamlist' : 'Add to Streamlist'}
       </button>
     </article>
   );
